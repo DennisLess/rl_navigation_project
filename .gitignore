@@ -6,6 +6,25 @@ __pycache__/
 # C extensions
 *.so
 
+# Unity
+MazeAgent/Library/
+MazeAgent/Temp/
+MazeAgent/Obj/
+MazeAgent/Build/
+MazeAgent/Builds/
+MazeAgent/Logs/
+MazeAgent/UserSettings/
+MazeAgent/*.suo
+MazeAgent/*.user
+MazeAgent/*.pidb
+MazeAgent/*.booproj
+MazeAgent/*.svd
+MazeAgent/*.pdb
+MazeAgent/*.opendb
+MazeAgent/*.VC.db
+MazeAgent/[Ll]ibrary/
+MazeAgent/[Tt]emp/
+
 # Distribution / packaging
 .Python
 build/
