@@ -19,6 +19,9 @@ public class MazeAgentScript : Agent
     private Vector3 startPosition; // Startposition des Agenten; wird beim Reset gebraucht
     private Quaternion startRotation; // Startrotation des Agenten; wird beim Reset gebraucht
 
+    [Header("Environment Index")]
+    public int envIndex = 0; // 0 = Env1, 1 = Env2, 2 = Env3
+
     // Aufgerufen zum ertstmaligen Start des Agenten
     public override void Initialize()
     {
@@ -29,6 +32,7 @@ public class MazeAgentScript : Agent
 
     public override void OnEpisodeBegin()
     {
+        ScoreManager.Instance?.OnEpisodeStart(envIndex);
         transform.localPosition = startPosition;
         transform.localRotation = startRotation;
         rb.velocity = Vector3.zero;
@@ -50,6 +54,8 @@ public class MazeAgentScript : Agent
             transform.Rotate(Vector3.up, turnSpeed * Time.deltaTime); // Drehung nach rechts (positive Richtung)
 
         AddReward(-0.001f); // Strafe für jede Aktion, um den Agenten zu motivieren, schneller zum Ziel zu kommen
+        if (StepCount >= MaxStep - 1)
+            ScoreManager.Instance?.OnTimeout(envIndex);
     }
 
     private void Update()
@@ -73,6 +79,7 @@ public class MazeAgentScript : Agent
         if (other.CompareTag("Goal"))
         {
             AddReward(1.0f); // Belohnung für das Erreichen des Ziels
+            ScoreManager.Instance?.OnGoalReached(envIndex); //Informiert Scoremanger über das Erreichen des Ziels
             EndEpisode(); // Beendet die aktuelle Episode, damit der Agent neu starten kann
         }
     }
@@ -83,6 +90,8 @@ public class MazeAgentScript : Agent
         if (collision.gameObject.CompareTag("Wall"))
         {
             AddReward(-0.5f); // Strafe für das Zusammenstoßen mit einer Wand
+            ScoreManager.Instance?.OnWallHit(envIndex); // Informiert den ScoreManager über das Treffen einer Wand
+
             EndEpisode(); // Beendet die aktuelle Episode, damit der Agent neu starten kann -> Treffen einer Wand wird bestraft
         }
     }
