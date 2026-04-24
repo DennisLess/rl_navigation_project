@@ -1,0 +1,15 @@
+# DQN wird separat über stable-baselines3 implementiert
+# Diese Datei ist ein Placeholder für die Dokumentation
+# Der echte DQN Code liegt in notebooks/03_hyperparameter_tuning.ipynb 
+
+algorithm: dqn
+hyperparameters:
+  learning_rate: 1.0e-4
+  buffer_size: 50000
+  batch_size: 32
+  gamma: 0.99
+  epsilon_start: 1.0
+  epsilon_end: 0.05
+  epsilon_decay: 10000
+  target_update: 1000
+max_episodes: 1000

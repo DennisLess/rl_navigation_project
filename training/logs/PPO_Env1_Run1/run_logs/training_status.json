@@ -1,0 +1,110 @@
+{
+    "MazeAgent": {
+        "checkpoints": [
+            {
+                "steps": 599987,
+                "file_path": "training/logs\\PPO_Env1_Run1\\MazeAgent\\MazeAgent-599987.onnx",
+                "reward": -2.418666754849255,
+                "creation_time": 1777062511.1596808,
+                "auxillary_file_paths": [
+                    "training/logs\\PPO_Env1_Run1\\MazeAgent\\MazeAgent-599987.pt"
+                ]
+            },
+            {
+                "steps": 649943,
+                "file_path": "training/logs\\PPO_Env1_Run1\\MazeAgent\\MazeAgent-649943.onnx",
+                "reward": -5.0000002374872565,
+                "creation_time": 1777062692.9552855,
+                "auxillary_file_paths": [
+                    "training/logs\\PPO_Env1_Run1\\MazeAgent\\MazeAgent-649943.pt"
+                ]
+            },
+            {
+                "steps": 699989,
+                "file_path": "training/logs\\PPO_Env1_Run1\\MazeAgent\\MazeAgent-699989.onnx",
+                "reward": -2.999000135343522,
+                "creation_time": 1777062876.5803666,
+                "auxillary_file_paths": [
+                    "training/logs\\PPO_Env1_Run1\\MazeAgent\\MazeAgent-699989.pt"
+                ]
+            },
+            {
+                "steps": 749949,
+                "file_path": "training/logs\\PPO_Env1_Run1\\MazeAgent\\MazeAgent-749949.onnx",
+                "reward": -2.948000118136406,
+                "creation_time": 1777063058.60818,
+                "auxillary_file_paths": [
+                    "training/logs\\PPO_Env1_Run1\\MazeAgent\\MazeAgent-749949.pt"
+                ]
+            },
+            {
+                "steps": 799951,
+                "file_path": "training/logs\\PPO_Env1_Run1\\MazeAgent\\MazeAgent-799951.onnx",
+                "reward": null,
+                "creation_time": 1777063246.6182837,
+                "auxillary_file_paths": [
+                    "training/logs\\PPO_Env1_Run1\\MazeAgent\\MazeAgent-799951.pt"
+                ]
+            },
+            {
+                "steps": 849960,
+                "file_path": "training/logs\\PPO_Env1_Run1\\MazeAgent\\MazeAgent-849960.onnx",
+                "reward": null,
+                "creation_time": 1777063430.0318704,
+                "auxillary_file_paths": [
+                    "training/logs\\PPO_Env1_Run1\\MazeAgent\\MazeAgent-849960.pt"
+                ]
+            },
+            {
+                "steps": 899961,
+                "file_path": "training/logs\\PPO_Env1_Run1\\MazeAgent\\MazeAgent-899961.onnx",
+                "reward": -5.0000002374872565,
+                "creation_time": 1777063613.0369802,
+                "auxillary_file_paths": [
+                    "training/logs\\PPO_Env1_Run1\\MazeAgent\\MazeAgent-899961.pt"
+                ]
+            },
+            {
+                "steps": 949997,
+                "file_path": "training/logs\\PPO_Env1_Run1\\MazeAgent\\MazeAgent-949997.onnx",
+                "reward": -5.0000002374872565,
+                "creation_time": 1777063742.117121,
+                "auxillary_file_paths": [
+                    "training/logs\\PPO_Env1_Run1\\MazeAgent\\MazeAgent-949997.pt"
+                ]
+            },
+            {
+                "steps": 999954,
+                "file_path": "training/logs\\PPO_Env1_Run1\\MazeAgent\\MazeAgent-999954.onnx",
+                "reward": null,
+                "creation_time": 1777063894.7787766,
+                "auxillary_file_paths": [
+                    "training/logs\\PPO_Env1_Run1\\MazeAgent\\MazeAgent-999954.pt"
+                ]
+            },
+            {
+                "steps": 1000018,
+                "file_path": "training/logs\\PPO_Env1_Run1\\MazeAgent\\MazeAgent-1000018.onnx",
+                "reward": null,
+                "creation_time": 1777063894.813329,
+                "auxillary_file_paths": [
+                    "training/logs\\PPO_Env1_Run1\\MazeAgent\\MazeAgent-1000018.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 1000018,
+            "file_path": "training/logs\\PPO_Env1_Run1\\MazeAgent.onnx",
+            "reward": null,
+            "creation_time": 1777063894.813329,
+            "auxillary_file_paths": [
+                "training/logs\\PPO_Env1_Run1\\MazeAgent\\MazeAgent-1000018.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.30.0",
+        "torch_version": "1.11.0+cpu"
+    }
+}

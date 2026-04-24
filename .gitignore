@@ -13,6 +13,7 @@ MazeAgent/Obj/
 MazeAgent/Build/
 MazeAgent/Builds/
 MazeAgent/Logs/
+MazeAgent/Recordings/
 MazeAgent/UserSettings/
 MazeAgent/*.suo
 MazeAgent/*.user
