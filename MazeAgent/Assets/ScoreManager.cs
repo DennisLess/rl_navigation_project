@@ -4,94 +4,89 @@ using UnityEngine.UI;
 
 public class ScoreManager : MonoBehaviour
 {
-    // Sinlgeton dmait MazeAgentScript auf die Statistiken zugreifen kann
+    // Singleton, damit MazeAgentScript auf den ScoreManager zugreifen kann
     public static ScoreManager Instance;
 
     [Header("UI Referenzen")]
     public TextMeshProUGUI scoreboardText;
     public TextMeshProUGUI algoText;
+    public TextMeshProUGUI envText;
     public Button resetButton;
 
+    [Header("Einstellungen")]
+    [SerializeField] private string currentAlgorithm = "PPO";
+    [SerializeField] private string currentEnvironment = "Env 1 - Simple";
 
-     [Header("Einstellungen")]
-    public string currentAlgorithm = "PPO";
-
-    // Statistiken für jedes Environment (Index 0, 1, 2)
-    private int[] episodeCount = new int[3];
-    private int[] goalReached  = new int[3];
-    private int[] wallHit      = new int[3];
-    private int[] timeout      = new int[3];
+    // Statistiken für eine Environment pro Szene
+    private int episodeCount = 0;
+    private int goalReached = 0;
+    private int wallHit = 0;
+    private int timeout = 0;
 
     private void Awake()
     {
         Instance = this;
     }
 
-     private void Start()
+    private void Start()
     {
         resetButton.onClick.AddListener(ResetStats);
+
         algoText.text = currentAlgorithm;
+        envText.text = currentEnvironment;
+
         UpdateUI();
     }
 
-    public void OnEpisodeStart(int envIndex)
+    public void OnEpisodeStart()
     {
-        episodeCount[envIndex]++;
+        episodeCount++;
         UpdateUI();
     }
 
-    public void OnGoalReached(int envIndex)
+    public void OnGoalReached()
     {
-        goalReached[envIndex]++;
+        goalReached++;
         UpdateUI();
     }
 
-    public void OnWallHit(int envIndex)
+    public void OnWallHit()
     {
-        wallHit[envIndex]++;
+        wallHit++;
         UpdateUI();
     }
 
-    public void OnTimeout(int envIndex)
+    public void OnTimeout()
     {
-        timeout[envIndex]++;
+        timeout++;
         UpdateUI();
     }
 
     public void ResetStats()
     {
-        for (int i = 0; i < 3; i++)
-        {
-            episodeCount[i] = 0;
-            goalReached[i]  = 0;
-            wallHit[i]      = 0;
-            timeout[i]      = 0;
-        }
+        episodeCount = 0;
+        goalReached = 0;
+        wallHit = 0;
+        timeout = 0;
+
         UpdateUI();
         Debug.Log("Scoreboard zurückgesetzt!");
     }
 
     private void UpdateUI()
     {
-        string[] envNames = {
-            "Env 1 - Simple ",
-            "Env 2 - Complex ",
-            "Env 3 - Warehouse "
-        };
+        int completedEpisodes = goalReached + wallHit + timeout;
 
-        string display = "";
-        for (int i = 0; i < 3; i++)
-        {
-            int completedEpisodes = goalReached[i] + wallHit[i] + timeout[i];
-            
-            float rate = completedEpisodes > 0
-                ? (float)goalReached[i] / completedEpisodes * 100f
-                : 0f;
+        float rate = completedEpisodes > 0
+            ? (float)goalReached / completedEpisodes * 100f
+            : 0f;
 
-            display += $"{envNames[i]}  |  Episode: {episodeCount[i]}\n";
-            display += $"  Ep: {completedEpisodes}  Goal: {goalReached[i]}  " +
-                       $"Wall: {wallHit[i]}  Rate: {rate:F1}%\n\n";
-        }
+        string display = $"{currentEnvironment} | Episode: {episodeCount}\n";
+        display += $"Finished: {completedEpisodes}  " +
+                   $"Goal: {goalReached}  " +
+                   $"Wall: {wallHit}  " +
+                   $"Timeout: {timeout}  " +
+                   $"Rate: {rate:F1}%\n";
 
         scoreboardText.text = display;
     }

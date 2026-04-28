@@ -3,30 +3,24 @@ using Unity.MLAgents;
 using Unity.MLAgents.Sensors;
 using Unity.MLAgents.Actuators;
 
-// Klasse für den Agenten, der das Labyrinth durchqueren soll (erbt von Agent)
+// Klasse für den Agenten, der das Labyrinth durchqueren soll
 public class MazeAgentScript : Agent
 {
-    // Header erstellt Überschrift im Inspector und 
-    // public macht die Variablen im Inspector sichtbar, damit sie angepasst werden können ohne in den Code zu gehen
     [Header("Einstellungen")]
-    public float moveSpeed = 3f; // Wie schnell sich der Agent (vorwärts / rückwärts) bewegen soll
-    public float turnSpeed = 150f; // Wie schnell sich der Agent drehen soll (links / rechts) im Grad pro Sekunde
+    public float moveSpeed = 3f;      // Geschwindigkeit für Vorwärts- und Rückwärtsbewegung
+    public float turnSpeed = 150f;    // Drehgeschwindigkeit in Grad pro Sekunde
 
     [Header("Ziel")]
-    public Transform goal; // Das Ziel-Objekt (grüne Kugel) – wird im Inspector per Drag & Drop zugewiesen
+    public Transform goal;            // Ziel-Objekt, wird im Inspector zugewiesen
 
     [Header("Spawn & Goal Punkte")]
-    public Transform[] spawnPoints; // Array aller Spawnpunkte – werden im Inspector zugewiesen
-    public Transform[] goalPoints;  // Array aller Goalpunkte – werden im Inspector zugewiesen
+    public Transform[] spawnPoints;   // mögliche Spawnpunkte für den Agenten
+    public Transform[] goalPoints;    // mögliche Positionen für das Ziel
 
-    [Header("Environment Index")]
-    public int envIndex = 0; // 0 = Env1, 1 = Env2, 2 = Env3
+    private Rigidbody rb;             // Rigidbody des Agenten
+    private int lastSpawnIndex = -1;  // letzter Spawnpunkt, um Wiederholungen zu vermeiden
+    private int lastGoalIndex = -1;   // letzter Goalpunkt, um Wiederholungen zu vermeiden
 
-    private Rigidbody rb; // Referenz zum Rigidbody des Agenten, um die Physik zu steuern (Rigidbody = Komponente, die es einem Objekt ermöglicht, sich physikalisch korrekt zu bewegen)
-    private int lastSpawnIndex = -1; // Speichert den letzten Spawnpunkt um Wiederholungen zu vermeiden
-    private int lastGoalIndex  = -1; // Speichert den letzten Goalpunkt um Wiederholungen zu vermeiden
-
-    // Aufgerufen zum erstmaligen Start des Agenten
     public override void Initialize()
     {
         rb = GetComponent<Rigidbody>();
@@ -35,109 +29,141 @@ public class MazeAgentScript : Agent
     public override void OnEpisodeBegin()
     {
         // ScoreManager über neue Episode informieren
-        ScoreManager.Instance?.OnEpisodeStart(envIndex);
+        ScoreManager.Instance?.OnEpisodeStart();
 
-        // Zufälligen Spawnpunkt wählen – nicht gleich wie der letzte damit der Agent
-        // nicht immer von derselben Position startet (verhindert Overfitting auf eine Route)
+        // Zufälligen Spawnpunkt wählen, möglichst nicht denselben wie vorher
         int spawnIndex;
-        do {
+
+        do
+        {
             spawnIndex = Random.Range(0, spawnPoints.Length);
-        } while (spawnIndex == lastSpawnIndex && spawnPoints.Length > 1);
+        }
+        while (spawnIndex == lastSpawnIndex && spawnPoints.Length > 1);
+
         lastSpawnIndex = spawnIndex;
 
-        // Agent an den gewählten Spawnpunkt teleportieren
+        // Agent an Spawnpunkt setzen
         transform.position = spawnPoints[spawnIndex].position;
         transform.rotation = spawnPoints[spawnIndex].rotation;
 
-        // Zufälligen Goalpunkt wählen – nicht gleich wie der letzte damit das Ziel
-        // nicht immer an derselben Stelle steht (erhöht Generalisierung)
+        // Zufälligen Goalpunkt wählen, möglichst nicht denselben wie vorher
         int goalIndex;
-        do {
+
+        do
+        {
             goalIndex = Random.Range(0, goalPoints.Length);
-        } while (goalIndex == lastGoalIndex && goalPoints.Length > 1);
+        }
+        while (goalIndex == lastGoalIndex && goalPoints.Length > 1);
+
         lastGoalIndex = goalIndex;
 
-        // Ziel an den gewählten Goalpunkt verschieben
+        // Ziel an Goalpunkt setzen
         goal.position = goalPoints[goalIndex].position;
 
-        // Physik-Bewegung komplett stoppen damit der Agent nicht mit alter
-        // Geschwindigkeit in die neue Episode startet
-        rb.velocity        = Vector3.zero;
+        // Physik zurücksetzen, damit der Agent nicht mit alter Bewegung startet
+        rb.linearVelocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
     }
 
-    // Beobachtungen sammeln – gibt dem Agenten zusätzliche Informationen über die Umgebung
-    // Der RayPerceptionSensor gibt Wandinformationen, CollectObservations gibt Zielinformationen
     public override void CollectObservations(VectorSensor sensor)
     {
-        // Richtung zum Ziel relativ zur Agenten-Ausrichtung (3 Werte: x, y, z)
+        // Richtung vom Agenten zum Ziel
         Vector3 toGoal = goal.position - transform.position;
+
+        // Zielrichtung relativ zur Ausrichtung des Agenten
         sensor.AddObservation(transform.InverseTransformDirection(toGoal.normalized));
 
-        // Distanz zum Ziel normalisiert auf 0-1 (1 Wert)
-        // Division durch 20 weil das Maze ca. 20 Einheiten groß ist
+        // Distanz zum Ziel, grob normalisiert
         sensor.AddObservation(toGoal.magnitude / 20f);
     }
 
     public override void OnActionReceived(ActionBuffers actions)
     {
-        int moveAction = actions.DiscreteActions[0]; // Aktion für Bewegung (0 = keine Bewegung, 1 = vorwärts, 2 = rückwärts)
-        int turnAction = actions.DiscreteActions[1]; // Aktion für Drehung (0 = keine Drehung, 1 = links, 2 = rechts)
+        int moveAction = actions.DiscreteActions[0]; // 0 = nichts, 1 = vorwärts, 2 = rückwärts
+        int turnAction = actions.DiscreteActions[1]; // 0 = nichts, 1 = links, 2 = rechts
 
-        // Space.Self stellt sicher dass die Bewegung relativ zur Agenten-Ausrichtung ist
+        // Bewegung relativ zur aktuellen Ausrichtung des Agenten
         if (moveAction == 1)
-            transform.Translate(Vector3.forward * moveSpeed * Time.fixedDeltaTime, Space.Self); // Vorwärtsbewegung
+        {
+            transform.Translate(Vector3.forward * moveSpeed * Time.fixedDeltaTime, Space.Self);
+        }
+
         if (moveAction == 2)
-            transform.Translate(Vector3.back * moveSpeed * Time.fixedDeltaTime, Space.Self); // Rückwärtsbewegung
+        {
+            transform.Translate(Vector3.back * moveSpeed * Time.fixedDeltaTime, Space.Self);
+        }
+
         if (turnAction == 1)
-            transform.Rotate(Vector3.up, -turnSpeed * Time.fixedDeltaTime, Space.Self); // Drehung nach links (negative Richtung)
+        {
+            transform.Rotate(Vector3.up, -turnSpeed * Time.fixedDeltaTime, Space.Self);
+        }
+
         if (turnAction == 2)
-            transform.Rotate(Vector3.up, turnSpeed * Time.fixedDeltaTime, Space.Self); // Drehung nach rechts (positive Richtung)
+        {
+            transform.Rotate(Vector3.up, turnSpeed * Time.fixedDeltaTime, Space.Self);
+        }
 
-        AddReward(-0.001f); // Strafe für jede Aktion, um den Agenten zu motivieren, schneller zum Ziel zu kommen
+        // Kleine Strafe pro Schritt, damit der Agent effiziente Wege lernt
+        AddReward(-0.001f);
 
-        // Timeout tracken – wenn Max Steps erreicht wird die Episode als Timeout gezählt
-        // == statt >= damit Timeout nur einmal gezählt wird
+        // Timeout zählen, wenn MaxStep fast erreicht ist
         if (StepCount == MaxStep - 1)
-            ScoreManager.Instance?.OnTimeout(envIndex);
+        {
+            ScoreManager.Instance?.OnTimeout();
+        }
     }
 
-    // Zielerkennung, um den Agenten zu belohnen, wenn er das Ziel erreicht
     private void OnTriggerEnter(Collider other)
-    { 
+    {
         if (other.CompareTag("Goal"))
         {
-            AddReward(5.0f); // Belohnung für das Erreichen des Ziels
-            ScoreManager.Instance?.OnGoalReached(envIndex); // Informiert ScoreManager über das Erreichen des Ziels
-            EndEpisode(); // Beendet die aktuelle Episode, damit der Agent neu starten kann
+            AddReward(5.0f);
+
+            ScoreManager.Instance?.OnGoalReached();
+
+            EndEpisode();
         }
     }
 
-    // Kollisionserkennung mit Wänden, um den Agenten zu bestrafen, wenn er mit einer Wand kollidiert
     private void OnCollisionEnter(Collision collision)
     {
-        // Nur Wände beenden die Episode – Boden und andere Objekte werden ignoriert
+        // Nur Wände beenden die Episode
         if (collision.gameObject.CompareTag("Wall"))
         {
-            AddReward(-0.5f); // Strafe für das Zusammenstoßen mit einer Wand
-            ScoreManager.Instance?.OnWallHit(envIndex); // Informiert den ScoreManager über das Treffen einer Wand
-            EndEpisode(); // Beendet die aktuelle Episode, damit der Agent neu starten kann -> Treffen einer Wand wird bestraft
+            AddReward(-0.5f);
+
+            ScoreManager.Instance?.OnWallHit();
+
+            EndEpisode();
         }
     }
 
-    // DAS FOLGENDE IST NUR FÜR TESTZWECKE UND NICHT FÜR DAS TRAINING DES AGENTEN NOTWENDIG!! 
-    // manuelle Steuerung zum testen des Agenten soll überprüft werden -> stimmen die Physics, funktioniert die Kollisionserkennung, etc.
+    // Manuelle Steuerung nur zum Testen mit Behavior Type = Heuristic Only
     public override void Heuristic(in ActionBuffers actionsOut)
     {
         var da = actionsOut.DiscreteActions;
-        da[0] = 0; da[1] = 0; // Standardaktionen (keine Bewegung, keine Drehung)
+
+        da[0] = 0;
+        da[1] = 0;
+
         if (Input.GetKey(KeyCode.W))
-            da[0] = 1; // Vorwärtsbewegung
+        {
+            da[0] = 1;
+        }
+
         if (Input.GetKey(KeyCode.S))
-            da[0] = 2; // Rückwärtsbewegung
+        {
+            da[0] = 2;
+        }
+
         if (Input.GetKey(KeyCode.A))
-            da[1] = 1; // Drehung nach links
+        {
+            da[1] = 1;
+        }
+
         if (Input.GetKey(KeyCode.D))
-            da[1] = 2; // Drehung nach rechts
+        {
+            da[1] = 2;
+        }
     }
 }

@@ -536,8 +536,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 160, y: -75}
-  m_SizeDelta: {x: 100, y: 30}
+  m_AnchoredPosition: {x: 190, y: -30}
+  m_SizeDelta: {x: 85, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &256624768
 MonoBehaviour:
@@ -854,8 +854,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scoreboardText: {fileID: 1643648458}
   algoText: {fileID: 1703126494}
+  envText: {fileID: 0}
   resetButton: {fileID: 256624768}
   currentAlgorithm: PPO
+  currentEnvironment: Env 1 - Simple
 --- !u!4 &515758876
 Transform:
   m_ObjectHideFlags: 0
@@ -1579,7 +1581,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 10, y: -10}
-  m_SizeDelta: {x: 500, y: 220}
+  m_SizeDelta: {x: 500, y: 120}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &999300079
 MonoBehaviour:
@@ -2868,7 +2870,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -25, y: 25}
+  m_AnchoredPosition: {x: -25, y: -30}
   m_SizeDelta: {x: 400, y: 140}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1643648458
@@ -2918,8 +2920,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 19
-  m_fontSizeBase: 19
+  m_fontSize: 22
+  m_fontSizeBase: 22
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -3107,7 +3109,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 220, y: 80}
+  m_AnchoredPosition: {x: 220, y: 30}
   m_SizeDelta: {x: 80, y: 25}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1703126494
