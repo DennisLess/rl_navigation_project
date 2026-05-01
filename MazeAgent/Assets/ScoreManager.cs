@@ -33,7 +33,6 @@ public class ScoreManager : MonoBehaviour
         resetButton.onClick.AddListener(ResetStats);
 
         algoText.text = currentAlgorithm;
-        envText.text = currentEnvironment;
 
         UpdateUI();
     }
@@ -82,11 +81,11 @@ public class ScoreManager : MonoBehaviour
             : 0f;
 
         string display = $"{currentEnvironment} | Episode: {episodeCount}\n";
-        display += $"Finished: {completedEpisodes}  " +
-                   $"Goal: {goalReached}  " +
-                   $"Wall: {wallHit}  " +
-                   $"Timeout: {timeout}  " +
-                   $"Rate: {rate:F1}%\n";
+        display += $"Finished: {completedEpisodes}\n";
+        display += $"Goal: {goalReached}\n";
+        display += $"Wall: {wallHit}\n";
+        display += $"Timeout: {timeout}\n";
+        display += $"Rate: {rate:F1}%\n";
 
         scoreboardText.text = display;
     }

@@ -3,23 +3,24 @@ using Unity.MLAgents;
 using Unity.MLAgents.Sensors;
 using Unity.MLAgents.Actuators;
 
-// Klasse für den Agenten, der das Labyrinth durchqueren soll
-public class MazeAgentScript : Agent
+// Random Agent als Baseline
+// Wählt zufällige Aktionen und dient als untere Performance-Grenze
+public class RandomAgentScript : Agent
 {
     [Header("Einstellungen")]
-    public float moveSpeed = 8f;      // Geschwindigkeit für Vorwärts- und Rückwärtsbewegung
-    public float turnSpeed = 150f;    // Drehgeschwindigkeit in Grad pro Sekunde
+    public float moveSpeed = 8f;      // Muss identisch zum trainierten Agenten sein
+    public float turnSpeed = 150f;    // Muss identisch zum trainierten Agenten sein
 
     [Header("Ziel")]
-    public Transform goal;            // Ziel-Objekt, wird im Inspector zugewiesen
+    public Transform goal;
 
     [Header("Spawn & Goal Punkte")]
-    public Transform[] spawnPoints;   // mögliche Spawnpunkte für den Agenten
-    public Transform[] goalPoints;    // mögliche Positionen für das Ziel
+    public Transform[] spawnPoints;
+    public Transform[] goalPoints;
 
-    private Rigidbody rb;             // Rigidbody des Agenten
-    private int lastSpawnIndex = -1;  // letzter Spawnpunkt, um Wiederholungen zu vermeiden
-    private int lastGoalIndex = -1;   // letzter Goalpunkt, um Wiederholungen zu vermeiden
+    private Rigidbody rb;
+    private int lastSpawnIndex = -1;
+    private int lastGoalIndex = -1;
 
     public override void Initialize()
     {
@@ -28,7 +29,6 @@ public class MazeAgentScript : Agent
 
     public override void OnEpisodeBegin()
     {
-        // ScoreManager über neue Episode informieren
         ScoreManager.Instance?.OnEpisodeStart();
 
         // Zufälligen Spawnpunkt wählen, möglichst nicht denselben wie vorher
@@ -42,7 +42,6 @@ public class MazeAgentScript : Agent
 
         lastSpawnIndex = spawnIndex;
 
-        // Agent an Spawnpunkt setzen
         transform.position = spawnPoints[spawnIndex].position;
         transform.rotation = spawnPoints[spawnIndex].rotation;
 
@@ -57,30 +56,28 @@ public class MazeAgentScript : Agent
 
         lastGoalIndex = goalIndex;
 
-        // Ziel an Goalpunkt setzen
         goal.position = goalPoints[goalIndex].position;
 
-        // Physik zurücksetzen, damit der Agent nicht mit alter Bewegung startet
+        // Physik zurücksetzen
         rb.linearVelocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
     }
 
     public override void CollectObservations(VectorSensor sensor)
     {
-        // Richtung vom Agenten zum Ziel
+        // Gleiche Beobachtungen wie beim trainierten Agenten
+        // Der Random Agent nutzt sie nicht aktiv, aber die Environment-Spezifikation bleibt identisch
         Vector3 toGoal = goal.position - transform.position;
 
-        // Zielrichtung relativ zur Ausrichtung des Agenten
         sensor.AddObservation(transform.InverseTransformDirection(toGoal.normalized));
-
-        // Distanz zum Ziel, grob normalisiert
         sensor.AddObservation(toGoal.magnitude / 20f);
     }
 
     public override void OnActionReceived(ActionBuffers actions)
     {
-        // Eine diskrete Aktion mit 9 möglichen Kombinationen
-        int action = actions.DiscreteActions[0];
+        // Eingehende Actions werden ignoriert.
+        // Stattdessen wird zufällig eine der 9 möglichen Aktionen gewählt.
+        int action = Random.Range(0, 9);
 
         // Mapping:
         // moveAction: 0 = nichts, 1 = vorwärts, 2 = rückwärts
@@ -88,7 +85,6 @@ public class MazeAgentScript : Agent
         int moveAction = action % 3;
         int turnAction = action / 3;
 
-        // Bewegung relativ zur aktuellen Ausrichtung des Agenten
         if (moveAction == 1)
         {
             transform.Translate(Vector3.forward * moveSpeed * Time.fixedDeltaTime, Space.Self);
@@ -109,10 +105,9 @@ public class MazeAgentScript : Agent
             transform.Rotate(Vector3.up, turnSpeed * Time.fixedDeltaTime, Space.Self);
         }
 
-        // Kleine Strafe pro Schritt, damit der Agent effiziente Wege lernt
+        // Gleiche Schrittstrafe wie beim trainierten Agenten
         AddReward(-0.001f);
 
-        // Timeout zählen, wenn MaxStep fast erreicht ist
         if (StepCount == MaxStep - 1)
         {
             ScoreManager.Instance?.OnTimeout();
@@ -133,7 +128,6 @@ public class MazeAgentScript : Agent
 
     private void OnCollisionEnter(Collision collision)
     {
-        // Nur Wände beenden die Episode
         if (collision.gameObject.CompareTag("Wall"))
         {
             AddReward(-0.5f);
@@ -144,35 +138,12 @@ public class MazeAgentScript : Agent
         }
     }
 
-    // Manuelle Steuerung nur zum Testen mit Behavior Type = Heuristic Only
     public override void Heuristic(in ActionBuffers actionsOut)
     {
+        // Der ActionBuffer wird nicht genutzt, weil OnActionReceived selbst randomisiert.
+        // Trotzdem setzen wir einen gültigen Wert, damit Heuristic Only sauber läuft.
         var da = actionsOut.DiscreteActions;
 
-        int moveAction = 0;
-        int turnAction = 0;
-
-        if (Input.GetKey(KeyCode.W))
-        {
-            moveAction = 1;
-        }
-
-        if (Input.GetKey(KeyCode.S))
-        {
-            moveAction = 2;
-        }
-
-        if (Input.GetKey(KeyCode.A))
-        {
-            turnAction = 1;
-        }
-
-        if (Input.GetKey(KeyCode.D))
-        {
-            turnAction = 2;
-        }
-
-        // Zurückrechnen auf eine einzelne Aktion von 0 bis 8
-        da[0] = moveAction + 3 * turnAction;
+        da[0] = 0;
     }
 }
