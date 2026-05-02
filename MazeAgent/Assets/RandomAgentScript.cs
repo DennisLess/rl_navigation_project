@@ -3,114 +3,114 @@ using Unity.MLAgents;
 using Unity.MLAgents.Sensors;
 using Unity.MLAgents.Actuators;
 
-// Random Agent als Baseline
-// Wählt zufällige Aktionen und dient als untere Performance-Grenze
+// Random Agent als Baseline, der zufällige Aktionen aus demselben Aktionsraum wählt
 public class RandomAgentScript : Agent
 {
     [Header("Einstellungen")]
-    public float moveSpeed = 8f;      // Muss identisch zum trainierten Agenten sein
-    public float turnSpeed = 150f;    // Muss identisch zum trainierten Agenten sein
+    public float moveSpeed = 8f; // muss identisch zum trainierten Agenten sein
+    public float turnSpeed = 150f; // muss identisch zum trainierten Agenten sein
 
     [Header("Ziel")]
-    public Transform goal;
+    public Transform goal; // Ziel-Objekt, wird im Inspector zugewiesen
 
     [Header("Spawn & Goal Punkte")]
-    public Transform[] spawnPoints;
-    public Transform[] goalPoints;
+    public Transform[] spawnPoints; // mögliche Spawnpunkte
+    public Transform[] goalPoints; // mögliche Zielpositionen
 
-    private Rigidbody rb;
-    private int lastSpawnIndex = -1;
-    private int lastGoalIndex = -1;
+    private Rigidbody rb; // Rigidbody des Agenten
+
+    private int lastSpawnIndex = -1; // letzter Spawn, damit es nicht direkt wieder derselbe ist
+    private int lastGoalIndex = -1; // letztes Ziel, damit es nicht direkt wieder dasselbe ist
+
+    private int currentSpawnIndex = -1; // aktueller Spawnindex für CSV
+    private int currentGoalIndex = -1; // aktueller Goalindex für CSV
+
+    private float episodeReward = 0f; // sammelt Reward pro Episode
+    private bool episodeFinished = false; // verhindert doppeltes Loggen
 
     public override void Initialize()
     {
-        rb = GetComponent<Rigidbody>();
+        rb = GetComponent<Rigidbody>(); // Rigidbody einmalig holen
     }
 
     public override void OnEpisodeBegin()
     {
-        ScoreManager.Instance?.OnEpisodeStart();
+        ScoreManager.Instance?.OnEpisodeStart(); // UI über neue Episode informieren
 
-        // Zufälligen Spawnpunkt wählen, möglichst nicht denselben wie vorher
-        int spawnIndex;
+        episodeReward = 0f; // Reward für neue Episode zurücksetzen
+        episodeFinished = false; // Episode ist am Anfang noch offen
 
-        do
-        {
-            spawnIndex = Random.Range(0, spawnPoints.Length);
-        }
-        while (spawnIndex == lastSpawnIndex && spawnPoints.Length > 1);
-
-        lastSpawnIndex = spawnIndex;
-
-        transform.position = spawnPoints[spawnIndex].position;
-        transform.rotation = spawnPoints[spawnIndex].rotation;
-
-        // Zufälligen Goalpunkt wählen, möglichst nicht denselben wie vorher
-        int goalIndex;
+        int spawnIndex; // neuer Spawnindex
 
         do
         {
-            goalIndex = Random.Range(0, goalPoints.Length);
+            spawnIndex = Random.Range(0, spawnPoints.Length); // zufälligen Spawn wählen
         }
-        while (goalIndex == lastGoalIndex && goalPoints.Length > 1);
+        while (spawnIndex == lastSpawnIndex && spawnPoints.Length > 1); // möglichst nicht denselben wie vorher
 
-        lastGoalIndex = goalIndex;
+        lastSpawnIndex = spawnIndex; // Spawn merken
+        currentSpawnIndex = spawnIndex; // Spawn fürs Logging merken
 
-        goal.position = goalPoints[goalIndex].position;
+        transform.position = spawnPoints[spawnIndex].position; // Agent an Spawn setzen
+        transform.rotation = spawnPoints[spawnIndex].rotation; // Rotation übernehmen
 
-        // Physik zurücksetzen
-        rb.linearVelocity = Vector3.zero;
-        rb.angularVelocity = Vector3.zero;
+        int goalIndex; // neuer Goalindex
+
+        do
+        {
+            goalIndex = Random.Range(0, goalPoints.Length); // zufälliges Ziel wählen
+        }
+        while (goalIndex == lastGoalIndex && goalPoints.Length > 1); // möglichst nicht dasselbe Ziel wie vorher
+
+        lastGoalIndex = goalIndex; // Ziel merken
+        currentGoalIndex = goalIndex; // Ziel fürs Logging merken
+
+        goal.position = goalPoints[goalIndex].position; // Ziel verschieben
+
+        rb.linearVelocity = Vector3.zero; // alte Bewegung stoppen
+        rb.angularVelocity = Vector3.zero; // alte Rotation stoppen
     }
 
     public override void CollectObservations(VectorSensor sensor)
     {
-        // Gleiche Beobachtungen wie beim trainierten Agenten
-        // Der Random Agent nutzt sie nicht aktiv, aber die Environment-Spezifikation bleibt identisch
-        Vector3 toGoal = goal.position - transform.position;
+        Vector3 toGoal = goal.position - transform.position; // Vektor zum Ziel
 
-        sensor.AddObservation(transform.InverseTransformDirection(toGoal.normalized));
-        sensor.AddObservation(toGoal.magnitude / 20f);
+        sensor.AddObservation(transform.InverseTransformDirection(toGoal.normalized)); // gleiche Beobachtung wie beim Trainingsagenten
+        sensor.AddObservation(toGoal.magnitude / 20f); // gleiche Distanzbeobachtung wie beim Trainingsagenten
     }
 
     public override void OnActionReceived(ActionBuffers actions)
     {
-        // Eingehende Actions werden ignoriert.
-        // Stattdessen wird zufällig eine der 9 möglichen Aktionen gewählt.
-        int action = Random.Range(0, 9);
+        int action = Random.Range(0, 9); // zufällige Aktion aus Discrete(9)
 
-        // Mapping:
-        // moveAction: 0 = nichts, 1 = vorwärts, 2 = rückwärts
-        // turnAction: 0 = nichts, 1 = links, 2 = rechts
-        int moveAction = action % 3;
-        int turnAction = action / 3;
+        int moveAction = action % 3; // 0 = nichts, 1 = vorwärts, 2 = rückwärts
+        int turnAction = action / 3; // 0 = nichts, 1 = links, 2 = rechts
 
         if (moveAction == 1)
         {
-            transform.Translate(Vector3.forward * moveSpeed * Time.fixedDeltaTime, Space.Self);
+            transform.Translate(Vector3.forward * moveSpeed * Time.fixedDeltaTime, Space.Self); // vorwärts fahren
         }
 
         if (moveAction == 2)
         {
-            transform.Translate(Vector3.back * moveSpeed * Time.fixedDeltaTime, Space.Self);
+            transform.Translate(Vector3.back * moveSpeed * Time.fixedDeltaTime, Space.Self); // rückwärts fahren
         }
 
         if (turnAction == 1)
         {
-            transform.Rotate(Vector3.up, -turnSpeed * Time.fixedDeltaTime, Space.Self);
+            transform.Rotate(Vector3.up, -turnSpeed * Time.fixedDeltaTime, Space.Self); // links drehen
         }
 
         if (turnAction == 2)
         {
-            transform.Rotate(Vector3.up, turnSpeed * Time.fixedDeltaTime, Space.Self);
+            transform.Rotate(Vector3.up, turnSpeed * Time.fixedDeltaTime, Space.Self); // rechts drehen
         }
 
-        // Gleiche Schrittstrafe wie beim trainierten Agenten
-        AddReward(-0.001f);
+        AddTrackedReward(-0.001f); // gleiche Schrittstrafe wie beim Trainingsagenten
 
         if (StepCount == MaxStep - 1)
         {
-            ScoreManager.Instance?.OnTimeout();
+            FinishEpisode("Timeout"); // Timeout loggen
         }
     }
 
@@ -118,11 +118,11 @@ public class RandomAgentScript : Agent
     {
         if (other.CompareTag("Goal"))
         {
-            AddReward(5.0f);
+            AddTrackedReward(5.0f); // gleicher Reward für Ziel
 
-            ScoreManager.Instance?.OnGoalReached();
+            FinishEpisode("Goal"); // Erfolg loggen
 
-            EndEpisode();
+            EndEpisode(); // Episode beenden
         }
     }
 
@@ -130,20 +130,56 @@ public class RandomAgentScript : Agent
     {
         if (collision.gameObject.CompareTag("Wall"))
         {
-            AddReward(-0.5f);
+            AddTrackedReward(-0.5f); // gleiche Wandstrafe
 
-            ScoreManager.Instance?.OnWallHit();
+            FinishEpisode("Wall"); // Wandkollision loggen
 
-            EndEpisode();
+            EndEpisode(); // Episode beenden
         }
+    }
+
+    private void AddTrackedReward(float reward)
+    {
+        AddReward(reward); // Reward an ML-Agents geben
+        episodeReward += reward; // Reward für CSV aufsummieren
+    }
+
+    private void FinishEpisode(string result)
+    {
+        if (episodeFinished)
+        {
+            return; // verhindert doppeltes Loggen
+        }
+
+        episodeFinished = true; // Episode als beendet markieren
+
+        if (result == "Goal")
+        {
+            ScoreManager.Instance?.OnGoalReached(); // UI Goal hochzählen
+        }
+        else if (result == "Wall")
+        {
+            ScoreManager.Instance?.OnWallHit(); // UI Wall hochzählen
+        }
+        else if (result == "Timeout")
+        {
+            ScoreManager.Instance?.OnTimeout(); // UI Timeout hochzählen
+        }
+
+        EpisodeLogger.Instance?.LogEpisode(
+            result,
+            StepCount,
+            episodeReward,
+            currentSpawnIndex,
+            currentGoalIndex,
+            MaxStep
+        ); // Episode in CSV schreiben
     }
 
     public override void Heuristic(in ActionBuffers actionsOut)
     {
-        // Der ActionBuffer wird nicht genutzt, weil OnActionReceived selbst randomisiert.
-        // Trotzdem setzen wir einen gültigen Wert, damit Heuristic Only sauber läuft.
-        var da = actionsOut.DiscreteActions;
+        var da = actionsOut.DiscreteActions; // ActionBuffer holen
 
-        da[0] = 0;
+        da[0] = 0; // Wert ist egal, da OnActionReceived selbst randomisiert
     }
 }
