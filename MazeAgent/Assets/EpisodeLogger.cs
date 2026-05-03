@@ -61,7 +61,7 @@ public class EpisodeLogger : MonoBehaviour
 
         string safeRunId = MakeSafeFileName(runId); // runId dateisicher machen
 
-        string fileName = $"{safeRunId}_Seed{seed}.csv"; // CSV-Dateiname ohne Zeitstempel
+        string fileName = $"{safeRunId}.csv"; // CSV-Dateiname ohne Zeitstempel
         logFilePathInternal = Path.Combine(fullOutputFolder, fileName); // kompletter Dateipfad
 
         string header =

@@ -14,8 +14,8 @@ public class ScoreManager : MonoBehaviour
     public Button resetButton;
 
     [Header("Einstellungen")]
-    [SerializeField] private string currentAlgorithm = "PPO";
-    [SerializeField] private string currentEnvironment = "Env 1 - Simple";
+    [SerializeField] private string currentAlgorithm = "Random";
+    [SerializeField] private string currentEnvironment = "Env 2 - Complex";
 
     // Statistiken für eine Environment pro Szene
     private int episodeCount = 0;

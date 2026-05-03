@@ -808,11 +808,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1aef090473c7ad348af501f529457b4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EpisodeLogger
-  runId: Random_Env1_Seed1
+  runId: Random_Env1_Seed100
   environmentName: Env1_Simple
   algorithmName: Random
   enableLogging: 1
   outputFolder: training/evaluation_logs
+  useMaxEpisodes: 1
+  maxEpisodes: 200
+  useMaxTotalSteps: 0
+  maxTotalSteps: 500000
+  stopPlayModeWhenLimitReached: 1
+  logFilePath: 1
+  logLimitReached: 1
 --- !u!4 &354510271
 Transform:
   m_ObjectHideFlags: 0
@@ -923,7 +930,7 @@ MonoBehaviour:
   algoText: {fileID: 1703126494}
   envText: {fileID: 0}
   resetButton: {fileID: 256624768}
-  currentAlgorithm: PPO
+  currentAlgorithm: Random
   currentEnvironment: Env 1 - Simple
 --- !u!4 &515758876
 Transform:
@@ -956,7 +963,6 @@ GameObject:
   - component: {fileID: 557609546}
   - component: {fileID: 557609545}
   - component: {fileID: 557609543}
-  - component: {fileID: 557609548}
   - component: {fileID: 557609549}
   m_Layer: 0
   m_Name: MazeAgent
@@ -1098,7 +1104,7 @@ MonoBehaviour:
     hasUpgradedBrainParametersWithActionSpec: 1
   m_Model: {fileID: 0}
   m_InferenceDevice: 0
-  m_BehaviorType: 0
+  m_BehaviorType: 1
   m_BehaviorName: MazeAgent
   TeamId: 0
   m_UseChildSensors: 1
@@ -1161,35 +1167,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 84
   m_CollisionDetection: 0
---- !u!114 &557609548
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 557609538}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: efe4498b0e207d449b7bf78be95c79da, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  agentParameters:
-    maxStep: 0
-  hasUpgradedFromAgentParameters: 1
-  MaxStep: 5000
-  moveSpeed: 8
-  turnSpeed: 150
-  goal: {fileID: 1494761119}
-  spawnPoints:
-  - {fileID: 1882457162}
-  - {fileID: 397044693}
-  - {fileID: 1273553759}
-  - {fileID: 1185829276}
-  goalPoints:
-  - {fileID: 1449222121}
-  - {fileID: 176220530}
-  - {fileID: 426371566}
-  - {fileID: 675141777}
 --- !u!114 &557609549
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1208,9 +1185,17 @@ MonoBehaviour:
   MaxStep: 5000
   moveSpeed: 8
   turnSpeed: 150
-  goal: {fileID: 0}
-  spawnPoints: []
-  goalPoints: []
+  goal: {fileID: 1494761119}
+  spawnPoints:
+  - {fileID: 1882457162}
+  - {fileID: 397044693}
+  - {fileID: 1273553759}
+  - {fileID: 1185829276}
+  goalPoints:
+  - {fileID: 1449222121}
+  - {fileID: 176220530}
+  - {fileID: 426371566}
+  - {fileID: 675141777}
 --- !u!1 &586455628
 GameObject:
   m_ObjectHideFlags: 0
@@ -1592,7 +1577,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 653691120a265844a96574a08bd188fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SeedManager
-  seed: 1
+  seed: 100
   logSeed: 1
 --- !u!4 &950870264
 Transform:
@@ -3343,8 +3328,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 220, y: 70}
-  m_SizeDelta: {x: 80, y: 25}
+  m_AnchoredPosition: {x: 190, y: 70}
+  m_SizeDelta: {x: 100, y: 25}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1703126494
 MonoBehaviour:
@@ -3366,7 +3351,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: PPO
+  m_text: Random
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
