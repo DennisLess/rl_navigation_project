@@ -1,0 +1,4 @@
+environment,success_rate_mean,success_rate_std,wall_rate_mean,wall_rate_std,timeout_rate_mean,timeout_rate_std,mean_reward_mean,mean_reward_std,mean_steps_mean,mean_steps_std
+Env1_Simple,0.0,0.0,1.0,0.0,0.0,0.0,-0.9978591,0.04893766595680674,497.85999999999996,48.937990099716984
+Env2_Complex,0.0,0.0,1.0,0.0,0.0,0.0,-0.61285,0.013487847771234645,112.85,13.48784777123467
+Env3_Warehouse,0.002,0.0027386127875258306,0.998,0.0027386127875258363,0.0,0.0,-0.619269,0.020193402821218665,130.269,13.895854327820222
