@@ -2336,7 +2336,7 @@ GameObject:
   - component: {fileID: 557609546}
   - component: {fileID: 557609545}
   - component: {fileID: 557609543}
-  - component: {fileID: 557609549}
+  - component: {fileID: 557609548}
   m_Layer: 0
   m_Name: MazeAgent
   m_TagString: Untagged
@@ -2540,7 +2540,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 84
   m_CollisionDetection: 0
---- !u!114 &557609549
+--- !u!114 &557609548
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2549,9 +2549,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 557609538}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 52423feb120d6fb498dedfb9b40218b3, type: 3}
+  m_Script: {fileID: 11500000, guid: efe4498b0e207d449b7bf78be95c79da, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::RandomAgentScript
+  m_EditorClassIdentifier: Assembly-CSharp::MazeAgentScript
   agentParameters:
     maxStep: 0
   hasUpgradedFromAgentParameters: 1
