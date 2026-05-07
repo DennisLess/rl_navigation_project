@@ -1,0 +1,3 @@
+algorithm,best_mean_reward,best_params
+A2C,-0.5321999886073172,"{'learning_rate': 1.1973220476107518e-05, 'n_steps': 5, 'gamma': 0.995, 'ent_coef': 0.002597549498493029, 'vf_coef': 0.75, 'max_grad_norm': 0.5}"
+DQN,-0.9016000354895368,"{'learning_rate': 4.9228176440041644e-05, 'buffer_size': 100000, 'learning_starts': 5000, 'batch_size': 32, 'gamma': 0.995, 'exploration_fraction': 0.3, 'exploration_final_eps': 0.02, 'target_update_interval': 1000}"

@@ -1,0 +1,6 @@
+algorithm,seed,run_id,command
+PPO,1,PPO_Env1_Seed1,mlagents-learn rl_navigation_project/training/configs/ppo_env1_config.yaml --run-id=PPO_Env1_Seed1 --seed=1 --results-dir=training/logs/final
+PPO,27,PPO_Env1_Seed27,mlagents-learn rl_navigation_project/training/configs/ppo_env1_config.yaml --run-id=PPO_Env1_Seed27 --seed=27 --results-dir=training/logs/final
+PPO,42,PPO_Env1_Seed42,mlagents-learn rl_navigation_project/training/configs/ppo_env1_config.yaml --run-id=PPO_Env1_Seed42 --seed=42 --results-dir=training/logs/final
+PPO,72,PPO_Env1_Seed72,mlagents-learn rl_navigation_project/training/configs/ppo_env1_config.yaml --run-id=PPO_Env1_Seed72 --seed=72 --results-dir=training/logs/final
+PPO,100,PPO_Env1_Seed100,mlagents-learn rl_navigation_project/training/configs/ppo_env1_config.yaml --run-id=PPO_Env1_Seed100 --seed=100 --results-dir=training/logs/final
