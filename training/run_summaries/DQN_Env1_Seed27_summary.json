@@ -1,0 +1,26 @@
+{
+    "run_id": "DQN_Env1_Seed27_v2",
+    "algorithm": "DQN",
+    "algorithm_version": "v2_manual_exploration",
+    "environment": "Env1_Simple",
+    "seed": 27,
+    "timesteps": 500000,
+    "trained_steps": 500000,
+    "hyperparameters": {
+        "learning_rate": 0.0001,
+        "buffer_size": 100000,
+        "learning_starts": 10000,
+        "batch_size": 32,
+        "gamma": 0.995,
+        "exploration_fraction": 0.3,
+        "exploration_final_eps": 0.02,
+        "target_update_interval": 1000
+    },
+    "started_at": "2026-05-09T16:37:21",
+    "finished_at": "2026-05-09T19:24:47",
+    "duration_seconds": 10045.13,
+    "recent_training_mean_reward": -2.170675114894402,
+    "model_path": "rl_navigation_project/training/models/final/DQN_Env1_Seed27_v2/final_model.zip",
+    "log_dir": "rl_navigation_project/training/logs/final/DQN_Env1_Seed27_v2",
+    "recording_dir": "rl_navigation_project/training/recordings"
+}

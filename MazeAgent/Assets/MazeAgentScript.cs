@@ -106,7 +106,7 @@ public class MazeAgentScript : Agent
             transform.Rotate(Vector3.up, turnSpeed * Time.fixedDeltaTime, Space.Self); // nach rechts drehen
         }
 
-        AddTrackedReward(-0.001f); // kleine Schrittstrafe für effizientes Verhalten
+        AddTrackedReward(-0.0005f); // kleine Schrittstrafe für effizientes Verhalten
 
         if (StepCount == MaxStep - 1)
         {
@@ -118,7 +118,7 @@ public class MazeAgentScript : Agent
     {
         if (other.CompareTag("Goal"))
         {
-            AddTrackedReward(5.0f); // Belohnung für Zielerreichung
+            AddTrackedReward(10.0f); // Belohnung für Zielerreichung
 
             FinishEpisode("Goal"); // Episode als Erfolg loggen
 
@@ -130,7 +130,7 @@ public class MazeAgentScript : Agent
     {
         if (collision.gameObject.CompareTag("Wall"))
         {
-            AddTrackedReward(-0.5f); // Strafe für Wandkollision
+            AddTrackedReward(-5.0f); // Strafe für Wandkollision
 
             FinishEpisode("Wall"); // Episode als Wandkollision loggen
 

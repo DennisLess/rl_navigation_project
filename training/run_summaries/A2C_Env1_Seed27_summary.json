@@ -1,0 +1,23 @@
+{
+    "run_id": "A2C_Env1_Seed27",
+    "algorithm": "A2C",
+    "environment": "Env1_Simple",
+    "seed": 27,
+    "timesteps": 500000,
+    "trained_steps": 500000,
+    "hyperparameters": {
+        "learning_rate": 0.0003,
+        "n_steps": 64,
+        "gamma": 0.995,
+        "ent_coef": 0.03,
+        "vf_coef": 0.5,
+        "max_grad_norm": 0.5
+    },
+    "started_at": "2026-05-08T15:45:33",
+    "finished_at": "2026-05-08T18:33:06",
+    "duration_seconds": 10052.49,
+    "recent_training_mean_reward": -5.3237252228311265,
+    "model_path": "rl_navigation_project/training/models/final/A2C_Env1_Seed27/final_model.zip",
+    "log_dir": "rl_navigation_project/training/logs/final/A2C_Env1_Seed27",
+    "recording_dir": "rl_navigation_project/training/recordings"
+}

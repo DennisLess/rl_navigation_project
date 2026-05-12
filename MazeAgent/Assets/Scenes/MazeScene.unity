@@ -808,12 +808,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1aef090473c7ad348af501f529457b4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EpisodeLogger
-  runId: A2C_Env1_Seed1
+  runId: DQN_Seed27_eval_Env1
   environmentName: Env1_Simple
-  algorithmName: A2C
-  enableLogging: 0
+  algorithmName: DQN
+  enableLogging: 1
   outputFolder: training/evaluation_logs
-  useMaxEpisodes: 0
+  useMaxEpisodes: 1
   maxEpisodes: 200
   useMaxTotalSteps: 0
   maxTotalSteps: 500000
@@ -930,7 +930,7 @@ MonoBehaviour:
   algoText: {fileID: 1703126494}
   envText: {fileID: 0}
   resetButton: {fileID: 256624768}
-  currentAlgorithm: A2C
+  currentAlgorithm: DQN
   currentEnvironment: Env 1 - Simple
 --- !u!4 &515758876
 Transform:
@@ -1577,7 +1577,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 653691120a265844a96574a08bd188fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SeedManager
-  seed: 1
+  seed: 27
   logSeed: 1
 --- !u!4 &950870264
 Transform:
@@ -3351,7 +3351,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: A2C
+  m_text: DQN
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
