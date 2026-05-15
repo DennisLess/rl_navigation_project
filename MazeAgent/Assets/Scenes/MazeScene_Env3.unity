@@ -913,7 +913,7 @@ MonoBehaviour:
   algoText: {fileID: 1703126494}
   envText: {fileID: 0}
   resetButton: {fileID: 256624768}
-  currentAlgorithm: Random
+  currentAlgorithm: PPO
   currentEnvironment: Env 3 - Warehouse
 --- !u!4 &515758876
 Transform:
@@ -1085,9 +1085,9 @@ MonoBehaviour:
     VectorActionDescriptions: []
     VectorActionSpaceType: 0
     hasUpgradedBrainParametersWithActionSpec: 1
-  m_Model: {fileID: 0}
+  m_Model: {fileID: 5022602860645237092, guid: 5b2bb045916d73845bbadb4337a68aa6, type: 3}
   m_InferenceDevice: 0
-  m_BehaviorType: 0
+  m_BehaviorType: 2
   m_BehaviorName: MazeAgent
   TeamId: 0
   m_UseChildSensors: 1
@@ -3712,7 +3712,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 653691120a265844a96574a08bd188fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SeedManager
-  seed: 100
+  seed: 1
   logSeed: 1
 --- !u!4 &1605401047
 Transform:
@@ -4074,7 +4074,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 190, y: 70}
+  m_AnchoredPosition: {x: 225, y: 70}
   m_SizeDelta: {x: 100, y: 25}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1703126494
@@ -4097,7 +4097,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Random
+  m_text: PPO
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -5043,13 +5043,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1aef090473c7ad348af501f529457b4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EpisodeLogger
-  runId: Random_Env3_Seed100
+  runId: PPO_Seed1_eval_Env3
   environmentName: Env3_Warehouse
-  algorithmName: Random
+  algorithmName: PPO
   enableLogging: 1
   outputFolder: training/evaluation_logs
   useMaxEpisodes: 1
-  maxEpisodes: 200
+  maxEpisodes: 50
   useMaxTotalSteps: 0
   maxTotalSteps: 500000
   stopPlayModeWhenLimitReached: 1

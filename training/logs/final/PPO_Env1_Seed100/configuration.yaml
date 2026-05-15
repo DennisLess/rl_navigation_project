@@ -49,7 +49,7 @@ env_settings:
   base_port: 5005
   num_envs: 1
   num_areas: 1
-  seed: 100
+  seed: -1
   max_lifetime_restarts: 10
   restarts_rate_limit_n: 1
   restarts_rate_limit_period_s: 60
@@ -66,7 +66,7 @@ checkpoint_settings:
   run_id: PPO_Env1_Seed100
   initialize_from: null
   load_model: false
-  resume: false
+  resume: true
   force: false
   train_model: false
   inference: false

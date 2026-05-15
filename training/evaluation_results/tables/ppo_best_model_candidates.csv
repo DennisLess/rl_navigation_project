@@ -1,0 +1,6 @@
+algorithm,analysis_run_id,seed,eval_environment,eval_mode,episodes,mean_reward,std_reward,mean_steps,std_steps,goals,timeouts,wall_like_failures,goal_rate,timeout_rate,wall_like_rate
+PPO,PPO_Seed1,1,Env1,ml_agents_inference,50,-2.4994,0.0,4999.0,0.0,0,50,0,0.0,1.0,0.0
+PPO,PPO_Seed100,100,Env1,ml_agents_inference,50,-2.4994,0.0,4999.0,0.0,0,50,0,0.0,1.0,0.0
+PPO,PPO_Seed42,42,Env1,ml_agents_inference,50,-2.554602,0.39033708535059797,4909.4,633.5676759431466,0,49,1,0.0,0.98,0.02
+PPO,PPO_Seed72,72,Env1,ml_agents_inference,50,-2.652856,0.6135993188938027,4705.9,1171.9775586414544,0,47,3,0.0,0.94,0.06
+PPO,PPO_Seed27,27,Env1,ml_agents_inference,50,-2.767226,0.9379567079801169,4734.64,986.0063699756981,0,46,4,0.0,0.92,0.08

@@ -1,0 +1,6 @@
+best_model_label,algorithm,analysis_run_id,seed,eval_environment,eval_mode,episodes,mean_reward,std_reward,mean_steps,std_steps,goals,timeouts,wall_like_failures,goal_rate,timeout_rate,wall_like_rate
+best_A2C_deterministic,A2C,A2C_Seed27,27,Env1,deterministic,50,-2.5000001187436283,0.0,5000.0,0.0,0,50,0,0.0,1.0,0.0
+best_A2C_stochastic,A2C,A2C_Seed1,1,Env1,stochastic,50,-5.058170211984543,1.3847651567133652,2116.34,1764.5984755745426,0,10,40,0.0,0.2,0.8
+best_DQN_deterministic,DQN,DQN_v1_Seed1,1,Env1,deterministic,50,-2.9797201351693365,1.0419128772310715,4159.44,1829.6500408101915,0,41,9,0.0,0.82,0.18
+best_DQN_stochastic,DQN,DQN_v1_Seed27,27,Env1,stochastic,50,-2.4310901234915945,5.48450500520542,1262.18,1865.0615428922206,8,8,34,0.16,0.16,0.68
+best_PPO,PPO,PPO_Seed1,1,Env1,ml_agents_inference,50,-2.4994,0.0,4999.0,0.0,0,50,0,0.0,1.0,0.0

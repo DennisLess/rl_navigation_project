@@ -1,0 +1,4 @@
+algorithm,eval_environment,eval_mode,episodes,mean_reward,mean_steps,mean_goal_rate,mean_timeout_rate,mean_wall_like_rate,mean_goal_rate_pct,mean_timeout_rate_pct,mean_wall_like_rate_pct
+Random,Env1,random_policy,250,-5.234872,469.74399999999997,0.0,0.0,1.0,0.0,0.0,100.0
+Random,Env2,random_policy,250,-5.055808,111.61599999999999,0.0,0.0,1.0,0.0,0.0,100.0
+Random,Env3,random_policy,250,-5.006600000000001,133.2,0.004,0.0,0.9960000000000001,0.4,0.0,99.60000000000001

@@ -3,5 +3,36 @@
         "stats_format_version": "0.3.0",
         "mlagents_version": "0.30.0",
         "torch_version": "2.8.0+cpu"
+    },
+    "MazeAgent": {
+        "checkpoints": [
+            {
+                "steps": 499954,
+                "file_path": "training/logs/final\\PPO_Env1_Seed27\\MazeAgent\\MazeAgent-499954.onnx",
+                "reward": null,
+                "creation_time": 1778706229.178993,
+                "auxillary_file_paths": [
+                    "training/logs/final\\PPO_Env1_Seed27\\MazeAgent\\MazeAgent-499954.pt"
+                ]
+            },
+            {
+                "steps": 500018,
+                "file_path": "training/logs/final\\PPO_Env1_Seed27\\MazeAgent\\MazeAgent-500018.onnx",
+                "reward": null,
+                "creation_time": 1778706229.2021797,
+                "auxillary_file_paths": [
+                    "training/logs/final\\PPO_Env1_Seed27\\MazeAgent\\MazeAgent-500018.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 500018,
+            "file_path": "training/logs/final\\PPO_Env1_Seed27\\MazeAgent.onnx",
+            "reward": null,
+            "creation_time": 1778706229.2021797,
+            "auxillary_file_paths": [
+                "training/logs/final\\PPO_Env1_Seed27\\MazeAgent\\MazeAgent-500018.pt"
+            ]
+        }
     }
 }

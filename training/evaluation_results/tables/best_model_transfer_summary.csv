@@ -1,0 +1,16 @@
+algorithm,analysis_run_id,seed,eval_environment,eval_mode,episodes,mean_reward,std_reward,mean_steps,std_steps,goals,timeouts,wall_like_failures,goal_rate,timeout_rate,wall_like_rate,goal_rate_pct,timeout_rate_pct,wall_like_rate_pct,short_label,best_model_label,env_order
+A2C,A2C_Seed27,27,Env1,deterministic,50,-2.5000001187436283,0.0,5000.0,0.0,0,50,0,0.0,1.0,0.0,0.0,100.0,0.0,A2C S27 deterministic,best_A2C_deterministic,1
+A2C,A2C_Seed27,27,Env2,deterministic,50,-4.855640197418397,0.601216109454831,311.28,1196.6749348055373,0,3,47,0.0,0.06,0.94,0.0,6.0,94.0,A2C S27 deterministic,best_A2C_deterministic,2
+A2C,A2C_Seed27,27,Env3,deterministic,50,-5.005300202406943,0.004600355129392152,10.6,9.200709821774067,0,0,50,0.0,0.0,1.0,0.0,0.0,100.0,A2C S27 deterministic,best_A2C_deterministic,3
+A2C,A2C_Seed1,1,Env1,stochastic,50,-5.058170211984543,1.3847651567133652,2116.34,1764.5984755745426,0,10,40,0.0,0.2,0.8,0.0,20.0,80.0,A2C S1 stochastic,best_A2C_stochastic,1
+A2C,A2C_Seed1,1,Env2,stochastic,50,-5.041960204148199,0.07507505716871436,83.92,150.1501072056812,0,0,50,0.0,0.0,1.0,0.0,0.0,100.0,A2C S1 stochastic,best_A2C_stochastic,2
+A2C,A2C_Seed1,1,Env3,stochastic,50,-5.046110204345314,0.055427588227731375,92.22,110.85517119012464,0,0,50,0.0,0.0,1.0,0.0,0.0,100.0,A2C S1 stochastic,best_A2C_stochastic,3
+DQN,DQN_v1_Seed1,1,Env1,deterministic,50,-2.9797201351693365,1.0419128772310715,4159.44,1829.6500408101915,0,41,9,0.0,0.82,0.18,0.0,82.0,18.0,DQN S1 deterministic,best_DQN_deterministic,1
+DQN,DQN_v1_Seed1,1,Env2,deterministic,50,-3.3109401459549552,1.1944765783313802,3421.88,2324.533498426324,0,34,16,0.0,0.68,0.32,0.0,68.0,32.0,DQN S1 deterministic,best_DQN_deterministic,2
+DQN,DQN_v1_Seed1,1,Env3,deterministic,50,-4.488990185656585,1.0690892559204537,1177.98,2054.6758271547064,0,11,39,0.0,0.22,0.78,0.0,22.0,78.0,DQN S1 deterministic,best_DQN_deterministic,3
+DQN,DQN_v1_Seed27,27,Env1,stochastic,50,-2.4310901234915945,5.48450500520542,1262.18,1865.0615428922206,8,8,34,0.16,0.16,0.68,16.0,16.0,68.0,DQN S27 stochastic,best_DQN_stochastic,1
+DQN,DQN_v1_Seed27,27,Env2,stochastic,50,-4.841360198860056,0.9276407922492161,882.72,1658.2201306318332,0,6,44,0.0,0.12,0.88,0.0,12.0,88.0,DQN S27 stochastic,best_DQN_stochastic,2
+DQN,DQN_v1_Seed27,27,Env3,stochastic,50,-3.3027501505217516,4.9590808627359015,405.5,969.4976660569101,6,1,43,0.12,0.02,0.86,12.0,2.0,86.0,DQN S27 stochastic,best_DQN_stochastic,3
+PPO,PPO_Seed1,1,Env1,ml_agents_inference,50,-2.4994,0.0,4999.0,0.0,0,50,0,0.0,1.0,0.0,0.0,100.0,0.0,PPO S1 ml_agents_inference,best_PPO,1
+PPO,PPO_Seed1,1,Env2,ml_agents_inference,50,-4.652876,0.87769252729727,705.78,1749.78831710978,0,7,43,0.0,0.14,0.86,0.0,14.000000000000002,86.0,PPO S1 ml_agents_inference,best_PPO,2
+PPO,PPO_Seed1,1,Env3,ml_agents_inference,50,-5.08675,0.21361271101252957,173.5,427.225422025059,0,0,50,0.0,0.0,1.0,0.0,0.0,100.0,PPO S1 ml_agents_inference,best_PPO,3
