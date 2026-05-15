@@ -1,0 +1,116 @@
+# ============================================================
+# RL Navigation Project – Python Requirements
+# ============================================================
+# Empfohlene Umgebung:
+# Python 3.9
+#
+# Hinweis:
+# Das Unity-Projekt selbst wird NICHT über diese Datei installiert.
+# Unity muss separat über Unity Hub installiert werden.
+#
+# Im Repository ist aktuell Unity 2022.3.62f3 eingetragen.
+# Während des Projekts wurde mit Unity 2022.3.x gearbeitet.
+#
+# Diese Datei beschreibt die Python-Abhängigkeiten für:
+# - Jupyter Notebooks
+# - Stable-Baselines3 Training/Evaluation
+# - Unity-Python-Kommunikation über ML-Agents
+# - Optuna-Tuning
+# - PPO ONNX Export
+# - Evaluation und Visualisierung
+# ============================================================
+
+
+# ------------------------------------------------------------
+# Basis: Datenverarbeitung und Visualisierung
+# ------------------------------------------------------------
+
+numpy==1.23.5
+pandas
+matplotlib
+tqdm
+
+
+# ------------------------------------------------------------
+# Jupyter / Notebook-Ausführung
+# ------------------------------------------------------------
+
+jupyter
+ipykernel
+
+
+# ------------------------------------------------------------
+# Reinforcement Learning: Stable-Baselines3
+# ------------------------------------------------------------
+# A2C und DQN wurden über Stable-Baselines3 trainiert/evaluiert.
+# SB3 2.x nutzt Gymnasium intern.
+# gym wird zusätzlich benötigt, weil UnityToGymWrapper / ältere ML-Agents-Komponenten teilweise noch OpenAI-Gym-Spaces verwenden.
+
+stable-baselines3==2.0.0
+gymnasium==0.28.1
+gym<0.26
+
+
+# ------------------------------------------------------------
+# PyTorch
+# ------------------------------------------------------------
+# Torch wird für Stable-Baselines3, eigene PyTorch-Beispiele
+# und ML-Agents benötigt.
+#
+# Hinweis:
+# Für dieses Projekt wird torch==1.11.0 als konservative Version passend zur verwendeten ML-Agents-Python-Version dokumentiert.
+# Neuere Torch-Versionen können je nach System funktionieren, sind aber nicht die primär dokumentierte Reproduktionsumgebung.
+
+torch==1.11.0
+
+
+# ------------------------------------------------------------
+# Unity ML-Agents Python Packages
+# ------------------------------------------------------------
+# Passend zur verwendeten ML-Agents-Python-Seite.
+# Die Unity-Seite muss separat über das Unity-Projekt/Package Setup eingerichtet werden.
+
+mlagents==0.30.0
+mlagents-envs==0.30.0
+
+
+# ------------------------------------------------------------
+# Hyperparameter-Tuning
+# ------------------------------------------------------------
+# Wird in Notebook 04 verwendet.
+
+optuna
+
+
+# ------------------------------------------------------------
+# Kompatibilität / Serialisierung
+# ------------------------------------------------------------
+# cloudpickle wird für gespeicherte SB3-Modelle benötigt.
+# shimmy wird benötigt, wenn SB3 alte Gym-Spaces nach Gymnasium konvertieren muss.
+
+cloudpickle
+shimmy>=0.2.1
+
+
+# ------------------------------------------------------------
+# ONNX Export für PPO / Unity Inference
+# ------------------------------------------------------------
+# Kritisch gepinnt:
+# Neuere protobuf-Versionen können bei ML-Agents 0.30.0 zu Fehlern, wie "Descriptors cannot be created directly" führen.
+
+onnx==1.13.1
+protobuf==3.20.3
+
+
+# ------------------------------------------------------------
+# TensorBoard / ML-Agents Logs
+# ------------------------------------------------------------
+
+tensorboard
+
+
+# ------------------------------------------------------------
+# Optional für Tabellenexporte
+# ------------------------------------------------------------
+
+openpyxl

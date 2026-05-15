@@ -913,7 +913,7 @@ MonoBehaviour:
   algoText: {fileID: 1703126494}
   envText: {fileID: 0}
   resetButton: {fileID: 256624768}
-  currentAlgorithm: PPO
+  currentAlgorithm: Random
   currentEnvironment: Env 3 - Warehouse
 --- !u!4 &515758876
 Transform:
@@ -947,6 +947,7 @@ GameObject:
   - component: {fileID: 557609545}
   - component: {fileID: 557609543}
   - component: {fileID: 557609550}
+  - component: {fileID: 557609551}
   m_Layer: 0
   m_Name: MazeAgent
   m_TagString: Untagged
@@ -1087,7 +1088,7 @@ MonoBehaviour:
     hasUpgradedBrainParametersWithActionSpec: 1
   m_Model: {fileID: 5022602860645237092, guid: 5b2bb045916d73845bbadb4337a68aa6, type: 3}
   m_InferenceDevice: 0
-  m_BehaviorType: 2
+  m_BehaviorType: 1
   m_BehaviorName: MazeAgent
   TeamId: 0
   m_UseChildSensors: 1
@@ -1162,6 +1163,43 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efe4498b0e207d449b7bf78be95c79da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MazeAgentScript
+  agentParameters:
+    maxStep: 0
+  hasUpgradedFromAgentParameters: 1
+  MaxStep: 5000
+  moveSpeed: 8
+  turnSpeed: 150
+  goal: {fileID: 1494761119}
+  spawnPoints:
+  - {fileID: 397044693}
+  - {fileID: 1273553759}
+  - {fileID: 1054384170}
+  - {fileID: 699990620}
+  - {fileID: 1700029292}
+  - {fileID: 1185829276}
+  - {fileID: 1882457162}
+  - {fileID: 359724409}
+  goalPoints:
+  - {fileID: 1081794949}
+  - {fileID: 426371566}
+  - {fileID: 1942486231}
+  - {fileID: 176220530}
+  - {fileID: 1226254462}
+  - {fileID: 1665585953}
+  - {fileID: 1449222121}
+  - {fileID: 675141777}
+--- !u!114 &557609551
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 557609538}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52423feb120d6fb498dedfb9b40218b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RandomAgentScript
   agentParameters:
     maxStep: 0
   hasUpgradedFromAgentParameters: 1
@@ -3712,7 +3750,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 653691120a265844a96574a08bd188fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SeedManager
-  seed: 1
+  seed: 100
   logSeed: 1
 --- !u!4 &1605401047
 Transform:
@@ -4074,7 +4112,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 225, y: 70}
+  m_AnchoredPosition: {x: 190, y: 70}
   m_SizeDelta: {x: 100, y: 25}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1703126494
@@ -4097,7 +4135,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: PPO
+  m_text: Random
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -5043,13 +5081,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1aef090473c7ad348af501f529457b4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EpisodeLogger
-  runId: PPO_Seed1_eval_Env3
+  runId: Random_Env3_Seed100
   environmentName: Env3_Warehouse
-  algorithmName: PPO
+  algorithmName: Random
   enableLogging: 1
   outputFolder: training/evaluation_logs
   useMaxEpisodes: 1
-  maxEpisodes: 50
+  maxEpisodes: 200
   useMaxTotalSteps: 0
   maxTotalSteps: 500000
   stopPlayModeWhenLimitReached: 1

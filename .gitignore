@@ -3,6 +3,9 @@ __pycache__/
 *.py[codz]
 *$py.class
 
+# Lernen des Programmierens mit RL
+notebooks/00a_learning_programming_RL.ipynb
+
 # C extensions
 *.so
 
