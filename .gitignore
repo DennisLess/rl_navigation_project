@@ -6,6 +6,12 @@ __pycache__/
 # Lernen des Programmierens mit RL
 notebooks/00a_learning_programming_RL.ipynb
 
+# Modelle vom Learn Programming mit RL
+notebooks/best_actor.pth
+notebooks/best_critic.pth
+best_actor.pth
+best_critic.pth
+
 # C extensions
 *.so
 
