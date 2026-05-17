@@ -511,7 +511,83 @@ Wichtige Komponenten:
 
 ---
 
-## 22. Hinweise zu großen Dateien
+## 22. Quellen und weiterführende Ressourcen
+
+Die wissenschaftliche Einordnung des Projekts basiert auf den Quellen, die in der schriftlichen Ausarbeitung vollständig bibliografisch angegeben sind. Dazu gehören insbesondere grundlegende und methodische Arbeiten zu Reinforcement Learning, Deep Reinforcement Learning, Reward Shaping, Unity ML-Agents, Stable-Baselines3, Optuna, Gymnasium sowie zur Reproduzierbarkeit empirischer RL-Experimente.
+
+### Wissenschaftliche Grundlagen
+
+Die folgenden Quellen bilden die wichtigste wissenschaftliche Grundlage des Projekts. Die vollständigen bibliografischen Angaben befinden sich in der schriftlichen Ausarbeitung.
+
+- Sutton, R. S., & Barto, A. G. (2018). *Reinforcement Learning: An Introduction*.
+- Mnih et al. (2015). *Human-level control through deep reinforcement learning*.
+- Mnih et al. (2016). *Asynchronous methods for deep reinforcement learning*.
+- Schulman et al. (2017). *Proximal Policy Optimization Algorithms*.
+- Ng et al. (1999). *Policy invariance under reward transformations: Theory and application to reward shaping*.
+- Juliani et al. (2018). *Unity: A general platform for intelligent agents*.
+- Raffin et al. (2021). *Stable-Baselines3: Reliable reinforcement learning implementations*.
+- Akiba et al. (2019). *Optuna: A next-generation hyperparameter optimization framework*.
+- Henderson et al. (2018). *Deep Reinforcement Learning that Matters*.
+- Patterson et al. (2024). *Empirical Design in Reinforcement Learning*.
+- Rengarajan et al. (2022). *Reinforcement learning with sparse rewards using guidance from offline demonstration*.
+- Towers et al. (2025). *Gymnasium: A standardized interface for reinforcement learning environments*.
+- de la Fuente & Vidal Guerra (2024). *A comparative study of deep reinforcement learning models: DQN vs PPO vs A2C*.
+
+### Technische Dokumentationen
+
+Für die technische Umsetzung waren zusätzlich die offiziellen Dokumentationen der verwendeten Frameworks relevant:
+
+- Unity ML-Agents Toolkit Documentation: https://unity-technologies.github.io/ml-agents/
+- Unity ML-Agents Package Documentation: https://docs.unity3d.com/Packages/com.unity.ml-agents@3.0/manual/index.html
+- Stable-Baselines3 Documentation: https://stable-baselines3.readthedocs.io/
+- Gymnasium Documentation: https://gymnasium.farama.org/
+- Optuna Documentation: https://optuna.readthedocs.io/
+- PyTorch Documentation: https://pytorch.org/docs/stable/index.html
+
+Diese Dokumentationen wurden vor allem für Installation, Schnittstellenverständnis, Training, Evaluation und technische Reproduzierbarkeit genutzt.
+
+### Persönliche Lernressourcen
+
+Vor der finalen Projektpipeline wurde ein privates Lernnotebook erstellt:
+
+```text
+notebooks/00a_learning_programming_RL.ipynb
+```
+
+Dieses Notebook diente ausschließlich der persönlichen Vorbereitung und ist nicht Teil der finalen experimentellen Evaluation. Die finale Projektpipeline beginnt ab Notebook 01.
+
+Für den persönlichen Lernprozess wurden unter anderem folgende Ressourcen genutzt:
+
+- DataCamp: *Reinforcement Learning with Gymnasium in Python*  
+  https://app.datacamp.com/learn/courses/reinforcement-learning-with-gymnasium-in-python
+
+- DataCamp: *Deep Reinforcement Learning in Python*  
+  https://app.datacamp.com/learn/courses/deep-reinforcement-learning-in-python
+
+- YouTube: *Reinforcement Learning Tutorial / Einführung in grundlegende RL-Konzepte*  
+  https://youtu.be/VnpRp7ZglfA?si=B2Umqkia0K6u-ubY
+
+- RL from Scratch – Learning Roadmap  
+  https://jugaljajjar.github.io/RL-From-Scratch/roadmap
+
+- RL Study Guide – How to Learn RL Step by Step  
+  https://github.com/anhOfTheStars/RLStudyGuide/blob/master/README.md
+
+- AI/ML Roadmap – Reinforcement Learning Module  
+  https://deepwiki.com/aad1011/AI-ML-Roadmap-from-scratch/2.10-module-9:-reinforcement-learning
+
+- YouTube: *A visual guide on Reinforcement Learning – the 6 things that make it “click”*  
+  https://www.youtube.com/watch?v=Qpx6WD0qekQ
+
+Diese Lernressourcen dienten der Einarbeitung in Reinforcement Learning, Gymnasium, Deep Reinforcement Learning und grundlegende RL-Programmierkonzepte. Sie sind nicht als wissenschaftliche Hauptquellen der Ausarbeitung zu verstehen, sondern als unterstützende Materialien für den persönlichen Lernprozess.
+
+### Abgrenzung des Lernnotebooks
+
+Das private Lernnotebook `00a_learning_programming_RL.ipynb` ist nicht Bestandteil der finalen öffentlichen Projektpipeline. Es enthält keine bewusst reproduzierten Kursaufgaben, Screenshots oder offiziellen Kursmaterialien, sondern dokumentiert ausschließlich den persönlichen Lernprozess. Die finalen Experimente, Evaluationen und Visualisierungen des Projekts befinden sich in den Notebooks `01` bis `07`.
+
+---
+
+## 23. Hinweise zu großen Dateien
 
 Gerade die Videoaufnahmen der Trainings- und Evaluationsläufe können sehr groß werden. Diese sind über die `.gitignore` Datei aus dem Repository ausgeschlossen.
 
@@ -519,7 +595,7 @@ Temporäre Unity-Ordner, Cache-Dateien, private Lernnotizen und große generiert
 
 ---
 
-## 23. Autor
+## 24. Autor
 
 Dennis Blum
 
